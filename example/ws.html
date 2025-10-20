@@ -1,0 +1,29 @@
+<html>
+
+<script>
+    (() => {
+            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTA3NzgyNzgwNDg2NDc2NTQ3NDg4IiwiZXhwIjoxNzM0Nzc2MTk1LCJpYXQiOjE3MDMxNTM3OTUsImlzcyI6InNlaWdhIn0.YTAo5nQaBq3qSopazmt95YT3DriAtAtA9kIAS9IU3G8"
+            const ws = new WebSocket('ws://localhost:8080/ws/1', ["wsProtocol", token])
+            ws.onopen = () => {
+                if (ws.protocol == 'wsProtocol') { 
+                    console.log('ws opened on browser')
+                    ws.send('hello world')
+                } else {
+                }
+            }
+
+            ws.onmessage = (message) => {
+                if (ws.protocol == 'wsProtocol') {
+                    console.log(`message received ${message}`)
+                } else {
+                }
+            }
+
+            ws.onerror = (ev,err) => {
+                console.log(ev)
+                console.log(`err received ${err}`)
+            }
+
+        })()
+</script>
+</html>
